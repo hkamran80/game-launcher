@@ -1,5 +1,17 @@
-# RepositoryName
-Tagline
+# Game Launcher
+Launch all your games
+
+## Features
+* Launchers
+  * Supported
+    * Steam
+    * Origin
+  * Planned
+    * Epic Games
+* Poster Downloads
+  * Direct from Steam (for Steam games)
+  * From IGDB (for all other launchers)
 
 ## Changelog
-ChangelogHere
+* Version 0.1.0 (2020-02-23):
+  * Initital support
