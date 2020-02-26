@@ -28,5 +28,5 @@ Launch all your games, from different launchers, from one page
 6. Run the Flask server with `python3 web_interface.py`
 
 ## Changelog
-* Version 0.1.0 (2020-02-23):
+* Version 0.1.0 (2020-02-25):
   * Initital support
