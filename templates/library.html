@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+
+        <title>Game Launcher</title>
+
+        <link href="/assets/css/game_library.css" rel="stylesheet" />
+    </head>
+    <body>
+        {% for _launcher in catalog %}
+            {% set launcher = catalog[_launcher] %}
+            {% for game in launcher %}
+                {% if _launcher == "STEAM" %}
+                    <div id="steam_{{ game[1] }}_container" class="game_container" data-game-launcher="STEAM" data-game-identifier="{{ game[1] }}" onclick="launch_game(this.id)">
+                        <img id="steam_{{ game[1] }}" width="200" height="300" class="game_art" src="{{ url_for('static', filename='covers/STEAM_' + game[1] + '.jpg') }}" />
+                        <img src="{{ url_for('static', filename='logos/steam_logo.512x512.png') }}" class="platform_logo" width="30" height="30">
+                        <span class="game_name">{{ game[0] }}</span>
+                    </div>
+                {% elif _launcher == "ORIGIN" %}
+                    <div id="origin_{{ game|lower|replace(' ', '-') }}_container" class="game_container" data-game-launcher="ORIGIN" data-game-identifier="{{ game }}" onclick="launch_game(this.id)">
+                        <img id="origin_{{ game|lower|replace(' ', '-') }}" width="200" height="300" class="game_art" src="{{ url_for('static', filename='covers/ORIGIN_' + game|lower|replace(' ', '-') + '.jpg') }}" />
+                        <img src="{{ url_for('static', filename='logos/origin_logo.512x512.png') }}" class="platform_logo" width="30" height="30">
+                        <span class="game_name">{{ game }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        <script>
+            function launch_game(container_id) {
+                let game_launcher = document.getElementById(container_id).getAttribute("data-game-launcher"),
+                    game_identifier = document.getElementById(container_id).getAttribute("data-game-identifier");
+
+                console.log("launcher=" + game_launcher + "&game_identifier=" + game_identifier);
+
+                var launch_game_request = new XMLHttpRequest();
+                launch_game_request.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                    }
+                };
+
+                launch_game_request.open("GET", "/launch?launcher=" + game_launcher + "&game_identifier=" + game_identifier, true);
+                launch_game_request.send();
+            }
+        </script>
+    </body>
+</html>
