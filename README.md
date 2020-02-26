@@ -1,5 +1,5 @@
 # Game Launcher
-Launch all your games
+Launch all your games, from different launchers, from one page
 
 ## Features
 * Launchers
